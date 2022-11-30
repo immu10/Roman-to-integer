@@ -25,18 +25,23 @@ int converter(char s)
 
 
 
-int romanToInt(char * s)
+int romanToInt(char *s)
 {
-   int result = converter(s[0]);
-   for (int i = 1; s[i] != '\0'; i++ )
+    int result =converter(s[0]);
+    for (int i=1; s[i]!= '\0'; i++)
     {
-        int num1= converter(s[i-1]), num2= converter(s[i]);
-        
-        if (num1< num2)
-            result += - num1 + (num2-num1);
+        int prev = converter(s[i-1]), cur = converter(s[i]);
+        if (cur > prev)
+            result = result - prev + cur - prev;
         else
-            result += num1;
-        printf("%d \t ", result)  ;  
+            result += cur;
+        
     }
     return result;
+}
+
+void main()
+{
+    int a = romanToInt("XXIV");
+    printf("%d", a);
 }
